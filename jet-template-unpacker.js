@@ -18,7 +18,9 @@
 
 export function loadTemplate(path) {
 
-    let content = document.head.querySelector(`link[href="${path}"]`).import.querySelector('template');
+    let content = document.head.querySelector(`link[href="${path}"]`)
+                          .import.querySelector('template');
+                          
     return document.importNode(content, true);
 }
 
