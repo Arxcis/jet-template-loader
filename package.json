@@ -1,6 +1,6 @@
 {
   "name": "jet-template-unpacker",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Simply load .html templates, and then unpacking the templates binding {{ data }} values from a given javascript object.",
   "main": "jet-template-unpacker.js",
   "scripts": {

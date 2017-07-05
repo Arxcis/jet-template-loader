@@ -16,7 +16,7 @@
 //         and unpacks them binding {{ data }} to them from matching properties of a javascript object.
 //
 
-export function createTemplate(path) {
+export function loadTemplate(path) {
 
     let content = document.head.querySelector(`link[href="${path}"]`).import.querySelector('template');
     return document.importNode(content, true);

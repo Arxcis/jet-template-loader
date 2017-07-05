@@ -36,9 +36,9 @@
 
     <script type="module">
         
-        import { createTemplate, unpackTemplate } from './jet-template-unpacker.js';
+        import { loadTemplate, unpackTemplate } from './jet-template-unpacker.js';
 
-        const postTemplate = createTemplate('./template/post.html');
+        const postTemplate = loadTemplate('./template/post.html');
 
         const post1        = unpackTemplate(postTemplate, postCollection[0]);
         const post2        = unpackTemplate(postTemplate, postCollection[1]);
