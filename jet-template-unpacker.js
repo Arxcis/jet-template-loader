@@ -14,8 +14,7 @@
 // @creator Jonas J. Solsvik
 // @brief Loads templates into the DOM from .html files, and unpacks them binding {{ data }} to them
 //         from a javascript object.
-// 
-// @methods
+//
 
 export function createTemplate(path, elementType = 'template') {
 
