@@ -4,6 +4,8 @@
 // fetch API parse to HTML - http://javascript.tutorialhorizon.com/2016/09/01/parse-html-response-with-fetch-api/
 // HTML loader - https://stackoverflow.com/questions/37818401/importing-html-files-with-es6-template-string-loader
 // Template databinding - https://www.joezimjs.com/javascript/javascript-templating-adding-html-the-right-way/
+// Defining new DOM elements with prototyping - https://www.html5rocks.com/en/tutorials/webcomponents/customelements/
+// Custom elements with Classes MDN - https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements/Custom_Elements_with_Classes
 
 //
 // @module jetloader
@@ -13,12 +15,46 @@
 // @brief For loading html <template> elements from separate files, using Fetch API (ajax)
 // 
 // @methods
-//   loadTemplate(url,  databinder = {})  -> promise<template>
-//   loadText(url)                        -> promise<text>
-//   bindTemplate(text, databinder = {})  -> template
-//   bindText(text, databinder = {})      -> text
-//
 
+//class TemplateElement extends HTMLElement {
+//
+//    constructor(_templateContent) {
+//        super();
+//        this.templateContent = JSON.parse(JSON.stringify(_templateContent)); // deepcopy
+//    }
+//
+//    connectedCallback() {
+//        this.appendChild(document.importNode(this.templateContent, true));
+//    }
+//}
+
+export function registerTemplate(name, templateContent) {
+    
+    if (document.createELement(name) === null) {
+        document.registerElement(name, {
+            prototype: () => {
+                let proto = Object.create(HTMLElement.prototype);
+                const content = JSON.parse(JSON.stringify(templateContent));
+                proto.appendChild(document.importNode(content, true));
+                return proto;
+            }(),
+        });
+    }
+}
+
+export function bindTemplate(template, data) {
+
+}
+
+
+export function registerTemplate(name, url) {
+
+    fetch(url).then({
+
+    });
+}
+
+/* DEPRICATED 
 export function loadTemplate(url, dataBinder = {}) {
 
     return fetch(url)
@@ -55,3 +91,5 @@ export function bindText(text, dataBinder = {}) {
     }
     return text;
 }
+
+*/
