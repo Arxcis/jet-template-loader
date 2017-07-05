@@ -1,0 +1,23 @@
+{
+  "name": "jet-template-loader",
+  "version": "0.1.0",
+  "description": "Simply ajax-load .html templates and bind {{ data }} to them using javascript objects.",
+  "main": "jet-template-loader.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arxcis/jet-template-loader.git"
+  },
+  "keywords": [
+    "html",
+    "templates"
+  ],
+  "author": "Jonas J. Solsvik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arxcis/jet-template-loader/issues"
+  },
+  "homepage": "https://github.com/Arxcis/jet-template-loader#readme"
+}
