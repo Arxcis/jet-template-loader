@@ -3,41 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>Jetloader - demo</title>
-    <script type="module" src="./jet-template-loader.js"></script>
+    <script type="module" src="./jet-template-unpacker.js"></script>
 
-    <link rel="import" href="./template/post.html">
-    
-</head>
-<body>
-
-<script type="module">
-    
-    import { loadTemplate, bindTemplate, loadText } from './jet-template-loader.js';
-
-
-    loadTemplate('./template/post.html', postCollection[0])
-    .then( template => { 
-        document.body.appendChild(template.content); 
-    });
-
-    loadText('./template/post.html')
-    .then( templateText => {
-        postCollection.forEach( post => {
-            let template = bindTemplate(templateText, post);
-            document.body.appendChild(template.content);
-        });
-    })
-
-
-</script>
-
-
-</body>
-</html>
+    <link id="template-post" rel="import" href="./template/post.html">
 
 <script>
-    let postCollection = 
-    [
+    let postCollection =  [
         { 
             'heading':  'My third post',
             'ingress':  'It all started the day when I was 10 minutes late for work for the 10th time....',
@@ -58,3 +29,27 @@
         },
     ];
 </script>
+
+</head>
+
+<body>
+
+    <script type="module">
+        
+        import { createTemplate, unpackTemplate } from './jet-template-unpacker.js';
+
+        const postTemplate = createTemplate('./template/post.html');
+
+        const post1        = unpackTemplate(postTemplate, postCollection[0]);
+        const post2        = unpackTemplate(postTemplate, postCollection[1]);
+        const post3        = unpackTemplate(postTemplate);
+        
+        document.body.appendChild(post1);
+        document.body.appendChild(post2);
+        document.body.appendChild(post3);
+    </script>
+
+
+</body>
+</html>
+
