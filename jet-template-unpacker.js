@@ -12,13 +12,13 @@
 // @file   jet-template-unpacker.js
 // @created 05.07.17
 // @creator Jonas J. Solsvik
-// @brief Loads templates into the DOM from .html files, and unpacks them binding {{ data }} to them
-//         from a javascript object.
+// @brief Loads templates into the DOM from <link href='*.html'> files,
+//         and unpacks them binding {{ data }} to them from matching properties of a javascript object.
 //
 
-export function createTemplate(path, elementType = 'template') {
+export function createTemplate(path) {
 
-    let content = document.head.querySelector(`link[href="${path}"]`).import.querySelector(elementType);
+    let content = document.head.querySelector(`link[href="${path}"]`).import.querySelector('template');
     return document.importNode(content, true);
 }
 
