@@ -29,7 +29,7 @@
 <script>
     'use strict';
 
-    let template = loadTemplate('#template-blog-post2');
+    const template = loadTemplate();
 
     class BlogPost extends HTMLElement {
     
@@ -45,7 +45,7 @@
         }
 
         connectedCallback() {
-            let fragment = unpackTemplate(this.template, this.args, false);
+            let fragment = unpackTemplate(this.template, this.args);
             this.appendChild(fragment);
         }
     }

@@ -26,7 +26,7 @@ function loadTemplate(query = 'template') {
 
 function unpackTemplate(template, data = {}) {
 
-    let templateClone = document.importNode(template, true);
+    let templateClone = template.cloneNode(true);
 
     if (data != {})
         templateClone.innerHTML = bindData(templateClone.innerHTML, data);
