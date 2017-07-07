@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // fetch API - https://davidwalsh.name/fetch
 // fetch API parse to HTML - http://javascript.tutorialhorizon.com/2016/09/01/parse-html-response-with-fetch-api/
@@ -16,26 +16,32 @@
 //         and unpacks them binding {{ data }} to them from matching properties of a javascript object.
 //
 
-export function loadTemplate(path) {
-
-    let content = document.head.querySelector(`link[href="${path}"]`)
-                          .import.querySelector('template');
-                          
-    return document.importNode(content, true);
+function mandatory() {
+    throw new Error('Missing parameter');
 }
 
-export function unpackTemplate(_template, dataBinder = {}) {
+function loadTemplate(query = 'template') {
+    return document.currentScript.ownerDocument.querySelector(query);
+}
 
-    let template = _template.cloneNode(true);
-    let text = template.innerHTML;
+function unpackTemplate(template, data = {}) {
 
-    if (dataBinder != {}) { 
+    let templateClone = document.importNode(template, true);
 
-        for (const property in dataBinder) {
-            const regexp = new RegExp('{{\\s*' + property + '\\s*}}', 'ig');
-            text = text.replace(regexp, dataBinder[property]);
-        }
+    if (data != {})
+        templateClone.innerHTML = bindData(templateClone.innerHTML, data);
+
+    if ('content' in templateClone)
+        return templateClone.content;
+    else
+        return templateClone;
+}
+
+function bindData(text, data) {
+
+    for (const property in data) {
+        const regexp = new RegExp('{{\\s*' + property + '\\s*}}', 'ig');
+        text = text.replace(regexp, data[property]);
     }
-    template.innerHTML = text;
-    return template.content;
+    return text;
 }

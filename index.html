@@ -3,49 +3,27 @@
 <head>
     <meta charset="utf-8">
     <title>Jetloader - demo</title>
-    <script type="module" src="./jet-template-unpacker.js"></script>
 
-    <link id="template-post" rel="import" href="./template/post.html">
+    <script src="jet-template-unpacker.js"></script>
+    <script src="post-collection.js"></script>
+
+    <link id="template-post" rel="import" href="./template/my-post.html">
 
 <script>
-    let postCollection =  [
-        { 
-            'heading': 'My third post',
-            'ingress': 'It all started the day when I was 10 minutes late for work for the 10th time....',
-            'bodytext': 'It was a sunny day and everyone was wishing they had a work that involved some outside work, but I am a software engineer and that involves nothing but indoor staring at a artificially illuminated screen for 8 hours a day...',
-            'visitorCount': (10 * 4.3),
-        },
-        { 
-            'heading': 'My second post',
-            'ingress': 'It all started the day when I was 10 minutes late for work for the 10th time....',
-            'bodytext': 'It was a sunny day and everyone was wishing they had a work that involved some outside work, but I am a software engineer and that involves nothing but indoor staring at a artificially illuminated screen for 8 hours a day...',
-            'visitorCount': (10 * 8.3),
-        },
-        { 
-            'heading': 'My first post',
-            'ingress': 'It all started the day when I was 10 minutes late for work for the 10th time....',
-            'bodytext': 'It was a sunny day and everyone was wishing they had a work that involved some outside work, but I am a software engineer and that involves nothing but indoor staring at a artificially illuminated screen for 8 hours a day...',
-            'visitorCount': (10 * 12.3),
-        },
-    ];
+
 </script>
 
 </head>
 
 <body>
 
-    <script type="module">
-        
-        import { loadTemplate, unpackTemplate } from './jet-template-unpacker.js';
+    <h1> hello </h1>
+    <script>
+        'use strict';
 
-        const postTemplate = loadTemplate('./template/post.html');
-
-        postCollection.forEach((post, index) => {
-            document.body.appendChild(unpackTemplate(postTemplate, postCollection[index]));
-        });
+        let post = new BlogPost(postCollection[0]);
+        document.body.appendChild(post);
     </script>
-
-
 </body>
 </html>
 
