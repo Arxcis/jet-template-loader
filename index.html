@@ -17,16 +17,24 @@
     <script>
         'use strict';
 
-        let post1 = new BlogPost(postCollection[0]);
-        document.body.appendChild(post1);
+        document.body.appendChild(new BlogPost(
+            { 
+                heading : 'Hello',
+                ingress : 'This is me',
+                bodytext : 'This is a very very long journey',
+                visitorCount : '1234567'
+            }
+        ));
 
-        let post2 = document.createElement('blog-post');
-        post2.args = postCollection[1];
-        document.body.appendChild(post2);
+        document.body.appendChild(new BlogPost(postCollection[0]));
 
-        let post3 = document.createElement('blog-post'); 
-        document.body.appendChild(post3);
-        post3.innerHTML = bindData(post3.innerHTML, postCollection[2]);
+       // let post2 = document.createElement('blog-post');
+       // post2.args = postCollection[1];
+       // document.body.appendChild(post2);
+
+       // let post3 = document.createElement('blog-post'); 
+       // document.body.appendChild(post3);
+       // post3.innerHTML = bindData(post3.innerHTML, postCollection[2]);
 
     </script>
 </body>
