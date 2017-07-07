@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // fetch API - https://davidwalsh.name/fetch
 // fetch API parse to HTML - http://javascript.tutorialhorizon.com/2016/09/01/parse-html-response-with-fetch-api/
@@ -16,54 +16,32 @@
 //         and unpacks them binding {{ data }} to them from matching properties of a javascript object.
 //
 
-function isTemplate (maybeTemplate) {
-  return 'content' in maybeTemplate;
-}
-//
-// @function loadTemplate
-// @brief Load a template document 
-//
-export function loadTemplateDoc(documentPath) {
-
-    let template = document.head.querySelector(`link[href="${documentPath}"]`).import.querySelector('template');
-    console.log('importing', template);
-    return document.importNode(template, true);
+function mandatory() {
+    throw new Error('Missing parameter');
 }
 
-//
-// @function loadTemplate
-// @brief load a template from within another document
-//
-export function loadTemplate(templateId, hostDocument)  {
-
-    let template = {};
-
-    if ('content' in hostDocument) {
-        template = hostDocument.content.querySelector(`#${templateId}`);
-    }
-    else { 
-        template = hostDocument.querySelector(templateId);
-    }
-
-    return document.importNode(template, true);
+function loadTemplate(query = 'template') {
+    return document.currentScript.ownerDocument.querySelector(query);
 }
 
-//
-// @function unpackTemplate
-// @brief unpacks the contents of the template, and binds the provided javascript object to the template bindings.
-//
-export function unpackTemplate(_template, dataBinder = {}) {
+function unpackTemplate(template, data = {}) {
 
-    let template = _template.cloneNode(true);
-    let text = template.innerHTML;
+    let templateClone = template.cloneNode(true);
 
-    if (dataBinder != {}) { 
+    if (data != {})
+        templateClone.innerHTML = bindData(templateClone.innerHTML, data);
 
-        for (const property in dataBinder) {
-            const regexp = new RegExp('{{\\s*' + property + '\\s*}}', 'ig');
-            text = text.replace(regexp, dataBinder[property]);
-        }
+    if ('content' in templateClone)
+        return templateClone.content;
+    else
+        return templateClone;
+}
+
+function bindData(text, data) {
+
+    for (const property in data) {
+        const regexp = new RegExp('{{\\s*' + property + '\\s*}}', 'ig');
+        text = text.replace(regexp, data[property]);
     }
-    template.innerHTML = text;
-    return template.content;
+    return text;
 }

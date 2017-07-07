@@ -4,11 +4,31 @@
     <meta charset="utf-8">
     <title>Jetloader - demo</title>
 
+    <script src="jet-template-unpacker.js"></script>
+    <script src="post-collection.js"></script>
+    <link   id="template-post" rel="import" href="./template/my-post.html">
+
     <link id="template-post" rel="import" href="./view/blog.html">
     <script type="module" src="startup.js"></script>
 </head>
 <body>
 
+    <h1> hello </h1>
+    <script>
+        'use strict';
+
+        let post1 = new BlogPost(postCollection[0]);
+        document.body.appendChild(post1);
+
+        let post2 = document.createElement('blog-post');
+        post2.args = postCollection[1];
+        document.body.appendChild(post2);
+
+        let post3 = document.createElement('blog-post'); 
+        document.body.appendChild(post3);
+        post3.innerHTML = bindData(post3.innerHTML, postCollection[2]);
+
+    </script>
 </body>
 </html>
 

@@ -1,0 +1,55 @@
+<template id="template-blog-post">
+
+    <div>
+        
+        <h1>{{ heading }}</h1>
+
+        <p><b> {{ ingress }}</b></p>
+
+        <p> {{ bodytext }}</p>
+
+        <h4> Number of visitors: {{ visitorCount }}</h4>
+
+    </div>
+
+</template>
+
+<div id="template-blog-post2">
+    
+    <h1>{{ heading }}</h1>
+
+    <p><b> {{ ingress }}</b></p>
+
+    <p> {{ bodytext }}</p>
+
+    <h4> Number of visitors: {{ visitorCount }}</h4>
+
+</div>
+
+<script>
+    'use strict';
+
+    const template = loadTemplate();
+
+    class BlogPost extends HTMLElement {
+        
+        get args ()     { return this._args; }
+        set args (args) { this._args = args; }
+
+        constructor({ heading='{{ heading }}', 
+                      ingress='{{ ingress }}', 
+                      bodytext='{{ bodytext }}', 
+                      visitorCount='{{ visitorCount }}'} = {}) {
+
+            super();
+            this.template = template; 
+            this._args = arguments[0];
+        }
+
+        connectedCallback() {
+            let fragment = unpackTemplate(this.template, this._args);
+            this.appendChild(fragment);
+        }
+    }
+    customElements.define('blog-post', BlogPost);
+</script>
