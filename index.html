@@ -21,8 +21,17 @@
     <script>
         'use strict';
 
-        let post = new BlogPost(postCollection[0]);
-        document.body.appendChild(post);
+        let post1 = new BlogPost(postCollection[0]);
+        document.body.appendChild(post1);
+
+        let post2 = document.createElement('blog-post');
+        post2.args = postCollection[1];
+        document.body.appendChild(post2);
+
+        let post3 = document.createElement('blog-post'); 
+        document.body.appendChild(post3);
+        post3.innerHTML = bindData(post3.innerHTML, postCollection[2]);
+
     </script>
 </body>
 </html>

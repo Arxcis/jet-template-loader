@@ -32,20 +32,22 @@
     const template = loadTemplate();
 
     class BlogPost extends HTMLElement {
-    
-        constructor({ 
-            heading = mandatory(), 
-            ingress = mandatory(), 
-            bodytext = mandatory(), 
-            visitorCount = mandatory()} = mandatory()) {
+        
+        get args ()     { return this._args; }
+        set args (args) { this._args = args; }
+
+        constructor({ heading='{{ heading }}', 
+                      ingress='{{ ingress }}', 
+                      bodytext='{{ bodytext }}', 
+                      visitorCount='{{ visitorCount }}'} = {}) {
 
             super();
             this.template = template; 
-            this.args = arguments[0];
+            this._args = arguments[0];
         }
 
         connectedCallback() {
-            let fragment = unpackTemplate(this.template, this.args);
+            let fragment = unpackTemplate(this.template, this._args);
             this.appendChild(fragment);
         }
     }
